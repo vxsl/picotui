@@ -6,6 +6,8 @@
 import sys
 import os
 
+from picotui.defs import VIM_KEYMAP
+
 
 KEY_UP = 1
 KEY_DOWN = 2
@@ -198,6 +200,8 @@ class Editor:
                 #self.show_status(repr(key))
                 if key in KEYMAP:
                     key = KEYMAP[key]
+                elif key in VIM_KEYMAP:
+                    key = VIM_KEYMAP
                 if key == KEY_QUIT:
                     return key
                 if self.handle_cursor_keys(key):

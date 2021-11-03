@@ -49,6 +49,15 @@ KEY_F8 = b'\x1b[19~'
 KEY_F9 = b'\x1b[20~'
 KEY_F10 = b'\x1b[21~'
 
+VIM_KEYMAP = {
+str.encode('k'): KEY_UP,
+str.encode('j'): KEY_DOWN,
+str.encode('h'): KEY_LEFT,
+str.encode('l'): KEY_RIGHT
+# b"\x1b[5~": KEY_PGUP, // ctrl+d, ctrl+u?
+# b"\x1b[6~": KEY_PGDN,
+}
+
 KEYMAP = {
 b"\x1b[A": KEY_UP,
 b"\x1b[B": KEY_DOWN,

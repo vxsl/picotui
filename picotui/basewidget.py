@@ -2,6 +2,7 @@ import os
 
 from .screen import Screen
 from .defs import KEYMAP as _KEYMAP
+from .defs import VIM_KEYMAP as _VIM_KEYMAP
 
 
 # Standard widget result actions (as return from .loop())
@@ -41,16 +42,21 @@ class Widget(Screen):
         self.cursor(False)
 
     def get_input(self):
-        if self.kbuf:
+        if False:
+            print(self.kbuf)
             key = self.kbuf[0:1]
             self.kbuf = self.kbuf[1:]
         else:
             key = os.read(0, 32)
+            print(key)
             if key[0] != 0x1b:
                 key = key.decode()
                 self.kbuf = key[1:].encode()
                 key = key[0:1].encode()
         key = _KEYMAP.get(key, key)
+        if not key:
+            key = _VIM_KEYMAP.get(key, key)
+
 
         if isinstance(key, bytes) and key.startswith(b"\x1b[M") and len(key) == 6:
             if key[3] != 32:
